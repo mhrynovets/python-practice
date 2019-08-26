@@ -26,7 +26,7 @@ def callAPI(token, method, uri, payload='{}'):
         result = mcall(uri)
 
     date = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    with open("resp-%s-%s-%s.txt" % (date, method, result.status_code), 'w') as f:
+    with open("logs/cs-resp-%s-%s-%s.txt" % (date, method, result.status_code), 'w') as f:
         f.write(result.text)
 
     if (result.status_code // 10) == 20:
