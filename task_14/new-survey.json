@@ -1,0 +1,40 @@
+{
+    "TaskSurvey 2": {
+        "FirstLook": {
+            "q1": {
+                "Description": "Do you like this task?",
+                "Answers": [
+                    "I like it!",
+                    "Neutral",
+                    "Better to do something else."
+                ]
+            },
+            "q2": {
+                "Description": "Will you recommend to do this task your friends?",
+                "Answers": [
+                    "Yes, of course!",
+                    "Not sure.",
+                    "No way!"
+                ]
+            }
+        },
+        "Details": {
+            "q3": {
+                "Description": "Were your programming skills improved?",
+                "Answers": [
+                    "Yes!",
+                    "May be.",
+                    "Nothing new, boring."
+                ]
+            },
+            "q4": {
+                "Description": "How much time you needed to finish this task?",
+                "Answers": [
+                    "One day",
+                    "One week",
+                    "One month"
+                ]
+            }
+        }
+    }
+}
