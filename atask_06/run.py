@@ -18,10 +18,14 @@ backupList = ["/etc/passwd", "/etc/group", "/etc/shadow"]
 date = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 tarName = "%s/backup_%s.tar" % (backupDir, date)
 
-tar = tarfile.open(tarName, "w")
-for name in backupList:
-    tar.add(name)
-tar.close()
+try:
+    tar = tarfile.open(tarName, "w")
+    for name in backupList:
+        tar.add(name)
+    tar.close()
+except:
+    print("Error with file handling.")
+    os.remove(tarName)
 
 i = 0
 for name in sorted(os.listdir(backupDir), reverse=True):

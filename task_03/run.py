@@ -6,12 +6,17 @@
 import sys
 import os
 
-if (len(sys.argv) == 1):
-    raise Exception('No Directory name given')
+if (len(sys.argv) != 2):
+    print("Usage: %s DIRNAME\nExiting..." % sys.argv[0])
+    sys.exit(1)
 
 dirName = sys.argv[1]
+try:
+    items = os.listdir(dirName)
+except:
+    print("Wrong DIRNAME is typed or directory not exist.")
+    sys.exit(1)
 
-items = os.listdir(dirName)
 for name in items:
     if os.path.isfile(os.path.join(dirName, name)):
         print(name)

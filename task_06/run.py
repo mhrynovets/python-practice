@@ -9,11 +9,11 @@ import re
 
 
 if (len(sys.argv) != 2):
-    print("You should type a filename as argument!")
+    print("Usage: %s FILE" % sys.argv[0])
+    print("Exit.")
     sys.exit(1)
 
 used = {}
-
 with open(sys.argv[1]) as f:
     for line in f:
         ua = re.findall(r"[\d\.]+ . . .+ .+ [\d]+ [\d]+ .+ (\".+\")", line)[0]

@@ -7,15 +7,14 @@ import sys
 import string
 
 if (len(sys.argv) != 2):
-    print("You should type one word, if spaces present - string must be enclosed in quotes")
+    print("You should type one word, if spaces are present - string must be enclosed in quotes")
     sys.exit(1)
 
 gotStr = sys.argv[1].strip("\"'")
-chars = list(gotStr)
 
 used = {}
 
-for item in chars:
+for item in gotStr:
     if item in used:
         used[item] += 1
     else:

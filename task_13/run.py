@@ -1,8 +1,29 @@
 #!/usr/bin/python3
 
-# 13. Remove duplicate from a list and create a tuple and find the minimum and maximum number.
+# 13. Remove duplicate from a list 
+# and create a tuple and find the minimum and maximum number.
+import sys
 
-nums = [1, 8, 2, 3, 4, 5, 5, 4, 3, 2, 1, 6]
+if len(sys.argv) != 2:
+    print("Usage: %s FILE" % sys.argv[0])
+    print("Exit.")
+    sys.exit(1)
+
+try:
+    with open(sys.argv[1]) as f:
+        line = f.readline()
+        nums = [int(x.strip()) for x in line.split(",") if x.strip() != ""]
+except OSError as err:
+    print("OS error: {0}".format(err))
+    sys.exit(1)
+except ValueError:
+    print("Some values in file are not numbers.")
+    print([x.strip() for x in line.split(",") if x.strip() != ""])
+    sys.exit(1)
+except:
+    print("Unexpected error:", sys.exc_info()[0])
+    sys.exit(1)
+
 print("Defined list: ", nums)
 
 uniq_nums = []

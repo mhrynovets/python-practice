@@ -7,10 +7,15 @@
 
 import re
 import urllib.request
+import sys
 
-url = 'https://www.gutenberg.org/cache/epub/60/pg60.txt'
 
-with urllib.request.urlopen(url) as response:
+if (len(sys.argv) != 2):
+    print("Usage: %s URL" % sys.argv[0])
+    print("Exit.")
+    sys.exit(1)
+
+with urllib.request.urlopen(sys.argv[1]) as response:
     encoding = response.info().get_param('charset', 'utf8')
     html = response.read().decode(encoding)
 

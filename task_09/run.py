@@ -6,9 +6,10 @@
 import sys
 
 if (len(sys.argv) != 3):
-    print("You should type two words")
+    print("Usage: %s str1 str2" % sys.argv[0])
+    print("Exit.")
     sys.exit(1)
-
+    
 # solution by one line
 # print(sys.argv[1][0:(len(sys.argv[1])//2):]+sys.argv[2]+sys.argv[1][(len(sys.argv[1])//2)::])
 

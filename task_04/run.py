@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-# 4. Write a program that takes text and prints two words: the most common and the longest.
+# 4. Write a program that takes text 
+# and prints two words: the most common and the longest.
 
 import sys
 import string
@@ -8,7 +9,7 @@ import string
 text = ""
 
 # read file, given as argument
-if (len(sys.argv) > 1):
+if (len(sys.argv) == 2):
     with open(sys.argv[1]) as f:
         for line in f:
             text += line
@@ -33,4 +34,5 @@ for item in words:
 most_common = max(used, key=used.get)
 
 print("Longest word is: ", longest)
-print("Most common used word is: %s (%s times used)." % (most_common,used[most_common]))
+print("Most common used word is: %s (%s times used)." % 
+    (most_common,used[most_common]))

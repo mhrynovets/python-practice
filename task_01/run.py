@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 
 # 1. Create script which builds Pascal triangle with n rows. Script accepts n as argument.
+import sys
 
 try:
-    n = int(input("Enter number of rows: ") or 3)
+    if len(sys.argv) == 2:
+        n = int(sys.argv[1])
+    else:
+        n = int(input("Enter number of rows: ") or 3)
 except ValueError as err:
     print("You typed a wrong number. Showing 3 rows as demo.")
     n = 3

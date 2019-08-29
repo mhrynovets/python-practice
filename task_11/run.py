@@ -7,12 +7,27 @@ import sys
 import random
 
 if (len(sys.argv) != 4):
-    print("You should type COUNT, FILE1, FILE2 as script parameters")
+    print("Usage: %s COUNT, FILE1, FILE2" % sys.argv[0])
+    print("Exit.")
     sys.exit(1)
 
-with open(sys.argv[2]) as f:
-    lines = f.readlines()
+try:
+    count = int(sys.argv[1])
+except:
+    print("Typed wrong COUNT parameter. Exit.")
+    sys.exit(1)    
 
-with open(sys.argv[3], 'a') as f:
-    for n in range(int(sys.argv[1])):
-        f.write(random.choice(lines))
+try:
+    with open(sys.argv[2]) as f:
+        lines = f.readlines()
+except:
+    print("Can't read first file. Exit.")
+    sys.exit(1)
+
+try:
+    with open(sys.argv[3], 'a') as f:
+        for n in range(int(sys.argv[1])):
+            f.write(random.choice(lines))
+except:
+    print("Can't write second file. Exit.")
+    sys.exit(1)

@@ -6,7 +6,8 @@
 import re, sys
 
 if (len(sys.argv) != 2):
-    print("You should give a filename as parameter. Exiting...")
+    print("Usage: %s FILE" % sys.argv[0])
+    print("Exit.")
     sys.exit(1)
 
 try:

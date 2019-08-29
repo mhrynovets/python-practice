@@ -7,12 +7,17 @@ import sys
 import random
 import re
 
-if (len(sys.argv) == 1):
-    print("You should type a filename as parameter!")
+if (len(sys.argv) != 2):
+    print("Usage: %s FILE" % sys.argv[0])
+    print("Exit.")
     sys.exit(1)
 
-with open(sys.argv[1]) as f:
-    lines = f.readlines()
+try:
+    with open(sys.argv[1]) as f:
+        lines = f.readlines()
+except:
+    print("Can't read given file. Exiting...")
+    sys.exit(1)
 
 randLine = random.choice(lines).strip()
 print(randLine)

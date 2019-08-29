@@ -5,15 +5,24 @@
 
 import sys
 
-if (len(sys.argv) != 2):
+if (len(sys.argv) == 1):
     raise Exception('No Filename given')
 
-dot_pos = sys.argv[1].rfind(".")
+if len(sys.argv) > 2:
+    raise Exception('Wrong arguments given. Filename with spaces should be enclosed in qoutes.')
 
-if (sys.argv[1].rfind(".") == -1):
+fname = sys.argv[1].strip("\"'")
+dot_pos = fname.rfind(".")
+
+if (dot_pos == -1):
     raise Exception('Got Filename without extension')
 
-if (sys.argv[1][dot_pos::].find(" ") != -1):
+if (fname[dot_pos::].find(" ") != -1):
     raise Exception('Got Filename with wrong extension')
 
-print(sys.argv[1][dot_pos:])
+print(fname[dot_pos::])
+
+# 20121021.my.file.name.txt.tar.bz2.gpg.part01
+# 20121021.my.file.name.txt
+# don't found standards - how to find, where to stop discovery of nested extensions,
+# so i think, that it should be the last part. Nested containers will have own extensions.

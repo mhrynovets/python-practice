@@ -12,8 +12,10 @@
 import sys
 
 if (len(sys.argv) != 2):
-    print("You should give a comma separated list of words as parameter. Exiting...")
+    print("Usage: %s STR where STR - comma separated words" % sys.argv[0])
+    print("Exit.")
     sys.exit(1)
+
 
 separator = ','
 words = sys.argv[1]
