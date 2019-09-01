@@ -1,34 +1,49 @@
 #!/usr/bin/python3
+""" remove elements of 2nd set from 1st set """
+# 10. Given a following two sets find the intersection
+# and remove those elements from the first set.
+# Print first set before removing, removed elements
+# and first set after removing elements.
 
-# 10. Given a following two sets find the intersection and remove those elements from the first set. 
-# Print first set before removing, removed elements and first set after removing elements.
-
-# fruits = {"apple", "banana", "cherry", "dog", "grape", "lemon", "orange", "monkey"}
-# animals = {"dog", "cow", "cat", "monkey", "rabbit"}
+# fruits = {"apple","banana","cherry","dog","grape","lemon","orange","monkey"}
+# animals = {"dog","cow","cat","monkey","rabbit"}
 import sys
+import argparse
 
-if len(sys.argv) not in range(2,4):
-    print("Usage: %s FILE1 FILE2. Exiting..." % sys.argv[0])
-    sys.exit(1)
 
-try:
-    with open(sys.argv[1]) as f:
-        line = f.readline()
-        fruits = {x.strip(" ").strip("'\"") for x in line.split(",")}
-except:
-    print("Can't read first file. Exiting...")
-    sys.exit(1)
+def main():
+    """ Main routine """
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--firstset', nargs='?', action='append',
+                        help='Elements of first set. Flag can be '
+                        'used multiple times to search many keywords.')
+    parser.add_argument('-s', '--secondset', nargs='?', action='append',
+                        help='Elements of second set. Flag can be '
+                        'used multiple times to search many keywords.')
+    args = parser.parse_args()
 
-try:
-    with open(sys.argv[2]) as f:
-        line = f.readline()
-        animals = {x.strip(" ").strip("'\"") for x in line.split(",")}
-except:
-    print("Can't read second file. Exiting...")
-    sys.exit(2)
+    if not args.firstset and not args.secondset:
+        print("No elements given.")
+        parser.print_help()
+        sys.exit(1)
+    print(args.firstset)
+    print(args.secondset)
+    if args.firstset:
+        first = set(args.firstset)
+    else:
+        first = set({})
+    if args.secondset:
+        second = set(args.secondset)
+    else:
+        second = set({})
 
-print("Defined set of fruits:", fruits)
-print("Defined set of animals:", animals)
-print("Intersection between defined sets 'fruits' and 'animals':",fruits.intersection(animals))
-print("Removing intersected items from 'fruits'",fruits.intersection(animals)); fruits.difference_update(animals)
-print("Final set of 'fruits'",fruits)
+    print("Defined set #1:", first)
+    print("Defined set #2:", second)
+    print("Intersection between defined sets :", first.intersection(second))
+    print("Removing intersected items from set #1", first.intersection(second))
+    first.difference_update(second)
+    print("Final set of #1", first)
+
+
+if __name__ == "__main__":
+    main()

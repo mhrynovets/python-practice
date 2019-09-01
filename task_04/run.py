@@ -1,38 +1,59 @@
 #!/usr/bin/python3
-
-# 4. Write a program that takes text 
+""" Finds most common and the longest word in
+ given file or piped text """
+# 4. Write a program that takes text
 # and prints two words: the most common and the longest.
 
 import sys
 import string
+import argparse
 
-text = ""
 
-# read file, given as argument
-if (len(sys.argv) == 2):
-    with open(sys.argv[1]) as f:
-        for line in f:
-            text += line
-# or read piped incomming text 
-else:
-    for line in sys.stdin:
-        text += line
+def main():
+    """ Main routine longest word"""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('infile', nargs='?',
+                        help='File, that contains words')
+    args = parser.parse_args()
 
-words = [word.strip(string.punctuation) for word in text.split()]
+    try:
+        if args.infile:
+            with open(args.infile) as read_file:
+                text = read_file.read()
+        elif not sys.stdin.isatty():
+            text = sys.stdin.read()
+        else:
+            parser.print_help()
+            sys.exit(1)
+    except FileNotFoundError:
+        print("Typed file not exist. Exit.")
+        sys.exit(1)
+    except PermissionError:
+        print("No permissions to acces typed file. Exit.")
+        sys.exit(1)
+    except OSError as err:
+        print(f"Another error occurred: {err.strerror}. Exit.")
+        sys.exit(1)
 
-used = {}
-longest = ""
+    words = [word.strip(string.punctuation) for word in text.split()]
 
-for item in words:
-    if (len(longest) < len(item)):
-        longest = item
-    if item in used:
-        used[item] += 1
-    else:
-        used[item] = 1
+    used = {}
+    longest = ""
 
-most_common = max(used, key=used.get)
+    for item in words:
+        if len(longest) < len(item):
+            longest = item
+        if item in used:
+            used[item] += 1
+        else:
+            used[item] = 1
 
-print("Longest word is: ", longest)
-print("Most common used word is: %s (%s times used)." % 
-    (most_common,used[most_common]))
+    most_common = max(used, key=used.get)
+
+    print("Longest word is: ", longest)
+    print("Most common used word is: {} ({} times used)."
+          "".format(most_common, used[most_common]))
+
+
+if __name__ == "__main__":
+    main()

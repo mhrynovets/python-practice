@@ -1,26 +1,35 @@
 #!/usr/bin/python3
-
-# 7. Create script, which will read random line from file (file will pass as parameter),
+""" print random line from file and count letters in that line """
+# 7. Create script, which will read random line from file
+# (file will pass as parameter),
 # print line to output and count letters in that line.
 
 import sys
 import random
 import re
+import os
 
-if (len(sys.argv) != 2):
-    print("Usage: %s FILE" % sys.argv[0])
-    print("Exit.")
-    sys.exit(1)
 
-try:
-    with open(sys.argv[1]) as f:
-        lines = f.readlines()
-except:
-    print("Can't read given file. Exiting...")
-    sys.exit(1)
+def main():
+    """ Main routine random line"""
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} FILE")
+        print("Exit.")
+        sys.exit(1)
 
-randLine = random.choice(lines).strip()
-print(randLine)
+    if not os.path.isfile(sys.argv[1]) and not os.access(sys.argv[1], os.R_OK):
+        print("Typed JSON file not found or no permissions to access. Exit.")
+        sys.exit(1)
 
-letters = re.findall(r"([a-zA-Z])", randLine)
-print("This line contains:", len(letters), "letters")
+    with open(sys.argv[1]) as read_file:
+        lines = read_file.readlines()
+
+    rand_line = random.choice(lines).strip()
+    print(rand_line)
+
+    letters = re.findall(r"([a-zA-Z])", rand_line)
+    print("This line contains:", len(letters), "letters")
+
+
+if __name__ == "__main__":
+    main()

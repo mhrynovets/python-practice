@@ -1,0 +1,1 @@
+{"survey_response_status":{"completely_responded":0,"not_responded":2,"partially_responded":0},"mail_status":{"opened":1,"not_sent":0,"opted_out":0,"sent":2,"bounced":0,"link_clicked":0},"recipients":2}

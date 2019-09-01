@@ -1,36 +1,41 @@
 #!/usr/bin/python3
-
-# 13. Remove duplicate from a list 
+""" Remove duplicate from a list """
+# 13. Remove duplicate from a list
 # and create a tuple and find the minimum and maximum number.
 import sys
+import argparse
 
-if len(sys.argv) != 2:
-    print("Usage: %s FILE" % sys.argv[0])
-    print("Exit.")
-    sys.exit(1)
 
-try:
-    with open(sys.argv[1]) as f:
-        line = f.readline()
-        nums = [int(x.strip()) for x in line.split(",") if x.strip() != ""]
-except OSError as err:
-    print("OS error: {0}".format(err))
-    sys.exit(1)
-except ValueError:
-    print("Some values in file are not numbers.")
-    print([x.strip() for x in line.split(",") if x.strip() != ""])
-    sys.exit(1)
-except:
-    print("Unexpected error:", sys.exc_info()[0])
-    sys.exit(1)
+def main():
+    """ Main routine """
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-l', '--list', nargs='?', action='append',
+                        help='Items list. Can be used multiple '
+                             'times to search many symbols.')
 
-print("Defined list: ", nums)
+    args = parser.parse_args()
+    if not args.list:
+        print("No items given. Exit.")
+        parser.print_help()
+        sys.exit(1)
 
-uniq_nums = []
-for num in nums:
-    if num not in uniq_nums:
-        uniq_nums.append(num)
-print("Same list without duplicates:", uniq_nums)
+    print("Defined list: ", args.list)
 
-tupl = (min(uniq_nums), max(uniq_nums))
-print("Tuple with min and max:", tupl)
+    uniq_items = []
+    for item in args.list:
+        if item not in uniq_items and item:
+            uniq_items.append(item)
+    print("Same list without duplicates:", uniq_items)
+
+    are_digits = [val.lstrip("-+").isdigit() for val in uniq_items]
+    if all(are_digits):
+        tupl = (min(uniq_items), max(uniq_items))
+        print("Tuple with min and max:", tupl)
+    else:
+        len_items = [len(val) for val in uniq_items]
+        tupl = (min(len_items), max(len_items))
+        print("Tuple with min and max:", tupl)
+
+
+if __name__ == "__main__":
+    main()
